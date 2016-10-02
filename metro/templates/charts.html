@@ -1,0 +1,172 @@
+<html>
+  <head>
+	<title>Analytics</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+	  var averages = {{ array1|safe }}
+	  google.load("visualization", "1", {packages:["corechart"]});
+	  google.setOnLoadCallback(drawChart);
+	  function drawChart() {
+		var data = google.visualization.arrayToDataTable([
+		  ['Line', 'Average Time'],
+		  ['Blue Line',     averages[0]],
+		  ['Red Line',      averages[1]],
+		  ['Orange Line',  averages[2]],
+		  ['Green Line', averages[3]],
+		  ['Yellow Line',   averages[4]]
+		]);
+
+		var options = {
+		  title: 'Average Line Times',
+		  is3D: true,
+		  colors: ['Blue', 'Red', 'Orange', 'Green', 'Yellow']
+		};
+
+		var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+		chart.draw(data, options);
+	  }
+    </script>
+	<script type="text/javascript">
+	  var averages = {{ array1|safe }}
+	  var stations = [["Addison Road-Seat Pleasant", 38.886713, -76.893592, "Blue"], ["Anacostia", 38.862072, -76.995648, "Green"], ["Archives", 38.893893,-77.021902, "Green","Yellow"],
+		["Arlington Cemetery", 38.884574,-77.063108, "Blue"], ["Ballston-MU", 38.882071,-77.111845, "Orange"], ["Benning Road", 38.890488,-76.938291, "Blue"],
+		["Bethesda", 38.984282,-77.094431, "Red"], ["Braddock Road", 38.814009,-77.053763, "Blue", "Yellow"],  ["Branch Ave", 38.826995,-76.912134, "Green"],
+		["Brookland-CUA", 38.933234,-76.994544, "Red"], ["Capitol Heights", 38.889757,-76.913382, "Blue"], ["Capitol South", 38.884968,-77.005137, "Blue", "Orange"],
+		["Cheverly", 38.916520,-76.915427, "Orange"], ["Clarendon", 38.886373,-77.096963, "Orange"], ["Cleveland Park", 38.934703,-77.058226, "Red"],
+		["College Park-U of MD", 38.978523,-76.928432, "Green"], ["Columbia Heights", 38.928672,-77.032775, "Green", "Yellow"], ["Congress Heights", 38.845334,-76.988170, "Green"],
+		["Court House", 38.891499,-77.083910, "Orange"], ["Crystal City", 38.857790,-77.050589, "Blue", "Yellow"], ["Deanwood", 38.907734,-76.936177, "Orange"], ["Dunn Loring-Merrifield", 38.883015,-77.228939, "Orange"],
+		["Dupont Circle", 38.909499,-77.043620, "Red"], ["East Falls Church", 38.885841,-77.157177, "Orange"], ["Eastern Market", 38.884124,-76.995334, "Blue", "Orange"], ["Eisenhower Avenue", 38.800313,-77.071173, "Yellow"],
+		["Farragut North", 38.903192,-77.039766, "Red"], ["Farragut West", 38.901311,-77.039810, "Blue", "Orange"], ["Federal Center SW", 38.884958,-77.015860, "Blue", "Orange"], ["Federal Triangle", 38.893757,-77.028218, "Blue", "Orange"],
+		["Foggy Bottom-GWU", 38.900599,-77.050273, "Blue", "Orange"], ["Forest Glen", 39.015413,-77.042953, "Red"], ["Fort Totten", 38.951777,-77.002174,"Green", "Yellow", "Red"],
+		["Franconia-Springfield", 38.766129,-77.168797, "Blue"], ["Friendship Heights", 38.960744,-77.085969, "Red"], ["Gallery Pl-Chinatown", 38.898340,-77.021851, "Green", "Yellow", "Red"],
+		["Georgia Ave-Petworth", 38.936077,-77.024728, "Green", "Yellow"],["Glenmont", 39.061713,-77.053410, "Red"], ["Greenbelt", 39.011036,-76.911362, "Green"],
+		["Grosvenor-Strathmore", 39.029158,-77.104150, "Red"], ["Huntington", 38.793841,-77.075301, "Yellow"], ["Judiciary Square", 38.896084,-77.016643, "Red"], ["King St-Old Town", 38.806474,-77.061115,"Blue","Yellow"],
+		["Landover", 38.934411,-76.890988, "Orange"], ["Largo Town Center", 38.900800,-76.844900, "Blue"], ["L'Enfant Plaza", 38.884775,-77.021964, "Blue", "Orange", "Green", "Yellow"],  ["McPherson Square", 38.901316,-77.033652, "Blue", "Orange"],
+		["Medical Center", 38.999947,-77.097253, "Red"], ["Metro Center", 38.898303,-77.028099, "Blue", "Orange", "Red"], ["Minnesota Ave", 38.898284,-76.948042, "Orange"], ["Morgan Boulevard", 38.891300,-76.868200, "Blue"],
+		["Mt Vernon Sq 7th St-Convention Center", 38.905604,-77.022256, "Green", "Yellow"], ["Navy Yard-Ballpark", 38.876588,-77.005086, "Green"], ["Naylor Road", 38.851187,-76.956565, "Green"], ["New Carrollton", 38.947674,-76.872144, "Orange"],
+		["NoMa-Gallaudet U", 38.907407,-77.002961, "Red"], ["Pentagon", 38.869349,-77.054013, "Blue", "Yellow"], ["Pentagon City", 38.863045,-77.059507, "Blue", "Yellow"], ["Potomac Ave", 38.880841,-76.985721, "Blue", "Orange"],
+		["Prince George's Plaza", 38.965276,-76.956182, "Green"], ["Rhode Island Ave", 38.920741,-76.995984, "Red"],["Rockville", 39.084215,-77.146424, "Red"], ["Ronald Reagan Washington National", 38.852985,-77.043805, "Blue","Yellow"],
+		["Rosslyn", 38.896595,-77.071460, "Blue", "Orange"], ["Shady Grove", 39.119819,-77.164921, "Red"], ["Shaw-Howard U", 38.912919,-77.022194, "Green", "Yellow"], ["Silver Spring", 38.993841,-77.031321, "Red"],
+		["Smithsonian", 38.888022,-77.028232, "Blue", "Orange"], ["Southern Avenue", 38.840974,-76.975360, "Green"], ["Stadium-Armory", 38.885940,-76.977485, "Blue", "Orange"], ["Suitland", 38.843891,-76.932022, "Green"],
+		["Takoma", 38.975532,-77.017834, "Red"], ["Tenleytown-AU", 38.947808,-77.079615, "Red"], ["Twinbrook", 39.062359,-77.121113, "Red"], ["U Street", 38.916489,-77.028938, "Green", "Yellow"], ["Union Station", 38.897723,-77.006745, "Red"],
+		["Van Dorn Street", 38.799193,-77.129407, "Blue"], ["Van Ness-UDC", 38.943620,-77.063511, "Red"], ["Vienna", 38.877693,-77.271562, "Orange"],["Virginia Square-GMU", 38.883310,-77.104267, "Orange"],
+		["Waterfront", 38.876221,-77.017491, "Green"], ["West Falls Church", 38.900670,-77.189394, "Orange",], ["West Hyattsville", 38.954931,-76.969881, "Green"], ["Wheaton", 39.038558,-77.051098, "Red"],
+		["White Flint", 39.048043,-77.113131, "Red"], ["Woodley Park", 38.924999,-77.052648, "Red"]];
+	  
+	  var highest_stations = [];
+	  google.load("visualization", "1", {packages:["map", "table"]});
+      google.setOnLoadCallback(drawMap);
+      function drawMap() 
+	  {
+		for (var i = 5; i < averages.length; i++)
+		  {
+			for (var j = 0; j < stations.length; j++)
+			{
+				if(averages[i] == stations[j][0])
+				{
+					stations[j].push(averages[i+1]);
+					highest_stations.push(stations[j]);
+				}
+			}
+		  }
+        var data = google.visualization.arrayToDataTable([
+          ['Lat', 'Lon', 'Name'],
+          [highest_stations[0][1], highest_stations[0][2], highest_stations[0][0]],
+		  [highest_stations[1][1], highest_stations[1][2], highest_stations[1][0]],
+		  [highest_stations[2][1], highest_stations[2][2], highest_stations[2][0]],
+		  [highest_stations[3][1], highest_stations[3][2], highest_stations[3][0]],
+		  [highest_stations[4][1], highest_stations[4][2], highest_stations[4][0]]
+		  
+        ]);
+        var map = new google.visualization.Map(document.getElementById('map_chart'));
+        map.draw(data, {showTip: true});
+		var table = new google.visualization.Table(document.getElementById('table_div'));
+		table.draw(data, {showRowNumber: true});
+		google.visualization.events.addListener(table, 'select',
+			function() {
+				map.setSelection(table.getSelection());
+		});
+		google.visualization.events.addListener(map, 'select',
+			function() {
+				table.setSelection(map.getSelection());
+		});
+      }
+    </script>
+	<script type="text/javascript">
+	  var averages = {{ array1|safe }}
+	  var stations = [["Addison Road-Seat Pleasant", 38.886713, -76.893592, "Blue"], ["Anacostia", 38.862072, -76.995648, "Green"], ["Archives", 38.893893,-77.021902, "Green","Yellow"],
+		["Arlington Cemetery", 38.884574,-77.063108, "Blue"], ["Ballston-MU", 38.882071,-77.111845, "Orange"], ["Benning Road", 38.890488,-76.938291, "Blue"],
+		["Bethesda", 38.984282,-77.094431, "Red"], ["Braddock Road", 38.814009,-77.053763, "Blue", "Yellow"],  ["Branch Ave", 38.826995,-76.912134, "Green"],
+		["Brookland-CUA", 38.933234,-76.994544, "Red"], ["Capitol Heights", 38.889757,-76.913382, "Blue"], ["Capitol South", 38.884968,-77.005137, "Blue", "Orange"],
+		["Cheverly", 38.916520,-76.915427, "Orange"], ["Clarendon", 38.886373,-77.096963, "Orange"], ["Cleveland Park", 38.934703,-77.058226, "Red"],
+		["College Park-U of MD", 38.978523,-76.928432, "Green"], ["Columbia Heights", 38.928672,-77.032775, "Green", "Yellow"], ["Congress Heights", 38.845334,-76.988170, "Green"],
+		["Court House", 38.891499,-77.083910, "Orange"], ["Crystal City", 38.857790,-77.050589, "Blue", "Yellow"], ["Deanwood", 38.907734,-76.936177, "Orange"], ["Dunn Loring-Merrifield", 38.883015,-77.228939, "Orange"],
+		["Dupont Circle", 38.909499,-77.043620, "Red"], ["East Falls Church", 38.885841,-77.157177, "Orange"], ["Eastern Market", 38.884124,-76.995334, "Blue", "Orange"], ["Eisenhower Avenue", 38.800313,-77.071173, "Yellow"],
+		["Farragut North", 38.903192,-77.039766, "Red"], ["Farragut West", 38.901311,-77.039810, "Blue", "Orange"], ["Federal Center SW", 38.884958,-77.015860, "Blue", "Orange"], ["Federal Triangle", 38.893757,-77.028218, "Blue", "Orange"],
+		["Foggy Bottom-GWU", 38.900599,-77.050273, "Blue", "Orange"], ["Forest Glen", 39.015413,-77.042953, "Red"], ["Fort Totten", 38.951777,-77.002174,"Green", "Yellow", "Red"],
+		["Franconia-Springfield", 38.766129,-77.168797, "Blue"], ["Friendship Heights", 38.960744,-77.085969, "Red"], ["Gallery Pl-Chinatown", 38.898340,-77.021851, "Green", "Yellow", "Red"],
+		["Georgia Ave-Petworth", 38.936077,-77.024728, "Green", "Yellow"],["Glenmont", 39.061713,-77.053410, "Red"], ["Greenbelt", 39.011036,-76.911362, "Green"],
+		["Grosvenor-Strathmore", 39.029158,-77.104150, "Red"], ["Huntington", 38.793841,-77.075301, "Yellow"], ["Judiciary Square", 38.896084,-77.016643, "Red"], ["King St-Old Town", 38.806474,-77.061115,"Blue","Yellow"],
+		["Landover", 38.934411,-76.890988, "Orange"], ["Largo Town Center", 38.900800,-76.844900, "Blue"], ["L'Enfant Plaza", 38.884775,-77.021964, "Blue", "Orange", "Green", "Yellow"],  ["McPherson Square", 38.901316,-77.033652, "Blue", "Orange"],
+		["Medical Center", 38.999947,-77.097253, "Red"], ["Metro Center", 38.898303,-77.028099, "Blue", "Orange", "Red"], ["Minnesota Ave", 38.898284,-76.948042, "Orange"], ["Morgan Boulevard", 38.891300,-76.868200, "Blue"],
+		["Mt Vernon Sq 7th St-Convention Center", 38.905604,-77.022256, "Green", "Yellow"], ["Navy Yard-Ballpark", 38.876588,-77.005086, "Green"], ["Naylor Road", 38.851187,-76.956565, "Green"], ["New Carrollton", 38.947674,-76.872144, "Orange"],
+		["NoMa-Gallaudet U", 38.907407,-77.002961, "Red"], ["Pentagon", 38.869349,-77.054013, "Blue", "Yellow"], ["Pentagon City", 38.863045,-77.059507, "Blue", "Yellow"], ["Potomac Ave", 38.880841,-76.985721, "Blue", "Orange"],
+		["Prince George's Plaza", 38.965276,-76.956182, "Green"], ["Rhode Island Ave", 38.920741,-76.995984, "Red"],["Rockville", 39.084215,-77.146424, "Red"], ["Ronald Reagan Washington National", 38.852985,-77.043805, "Blue","Yellow"],
+		["Rosslyn", 38.896595,-77.071460, "Blue", "Orange"], ["Shady Grove", 39.119819,-77.164921, "Red"], ["Shaw-Howard U", 38.912919,-77.022194, "Green", "Yellow"], ["Silver Spring", 38.993841,-77.031321, "Red"],
+		["Smithsonian", 38.888022,-77.028232, "Blue", "Orange"], ["Southern Avenue", 38.840974,-76.975360, "Green"], ["Stadium-Armory", 38.885940,-76.977485, "Blue", "Orange"], ["Suitland", 38.843891,-76.932022, "Green"],
+		["Takoma", 38.975532,-77.017834, "Red"], ["Tenleytown-AU", 38.947808,-77.079615, "Red"], ["Twinbrook", 39.062359,-77.121113, "Red"], ["U Street", 38.916489,-77.028938, "Green", "Yellow"], ["Union Station", 38.897723,-77.006745, "Red"],
+		["Van Dorn Street", 38.799193,-77.129407, "Blue"], ["Van Ness-UDC", 38.943620,-77.063511, "Red"], ["Vienna", 38.877693,-77.271562, "Orange"],["Virginia Square-GMU", 38.883310,-77.104267, "Orange"],
+		["Waterfront", 38.876221,-77.017491, "Green"], ["West Falls Church", 38.900670,-77.189394, "Orange",], ["West Hyattsville", 38.954931,-76.969881, "Green"], ["Wheaton", 39.038558,-77.051098, "Red"],
+		["White Flint", 39.048043,-77.113131, "Red"], ["Woodley Park", 38.924999,-77.052648, "Red"]];
+	  
+		var lowest_stations = [];
+		google.load("visualization", "1", {packages:["map", "table"]});
+		google.setOnLoadCallback(drawMap);
+		function drawMap() 
+		{
+			for (var i = 15; i < averages.length; i++)
+			  {
+				for (var j = 0; j < stations.length; j++)
+				{
+					if(averages[i] == stations[j][0])
+					{
+						stations[j].push(averages[i+1]);
+						lowest_stations.push(stations[j]);
+					}
+				}
+			  }
+			var data = google.visualization.arrayToDataTable([
+			  ['Lat', 'Lon', 'Name'],
+			  [lowest_stations[0][1], lowest_stations[0][2], lowest_stations[0][0]],
+			  [lowest_stations[1][1], lowest_stations[1][2], lowest_stations[1][0]],
+			  [lowest_stations[2][1], lowest_stations[2][2], lowest_stations[2][0]],
+			  [lowest_stations[3][1], lowest_stations[3][2], lowest_stations[3][0]],
+			  [lowest_stations[4][1], lowest_stations[4][2], lowest_stations[4][0]]
+			]);
+			var map = new google.visualization.Map(document.getElementById('map_chart1'));
+			map.draw(data, {showTip: true});
+			var table = new google.visualization.Table(document.getElementById('table_div1'));
+			table.draw(data, {showRowNumber: true});
+			google.visualization.events.addListener(table, 'select',
+				function() {
+				map.setSelection(table.getSelection());
+            });
+			google.visualization.events.addListener(map, 'select',
+				function() {
+				table.setSelection(map.getSelection());
+            });
+		}
+		
+    </script>
+  </head>
+  <body>
+	<h1><center>Analytics</center></h1>
+    <div id="piechart_3d" style="width: 1000px; height: 500px;" align="center"></div>
+	<h3><center>Stations with Highest Average Times</center></h3>
+	<div id="map_chart" style="width: 500px; height: 300px; float: left"></div>
+	<div id="table_div" style="width: 500px; height: 300px; float: right"></div>
+	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><div align = "center"><h3>Stations with Lowest Average Times</h3></div>
+	<div id="table_div1" style="width: 500px; height: 300px; float: left"></div>
+	<div id='map_chart1' style="width: 500px; height: 300px; float: right"></div>
+  </body>
+</html>
